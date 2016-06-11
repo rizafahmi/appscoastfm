@@ -1,5 +1,8 @@
+require IEx
 defmodule AppscoastFm.PodcastController do
   use AppscoastFm.Web, :controller
+
+  plug :authenticate when action in [:index, :show, :edit, :update, :delete]
 
   alias AppscoastFm.Podcast
 
@@ -16,11 +19,12 @@ defmodule AppscoastFm.PodcastController do
   end
 
   def create(conn, %{"podcast" => podcast_params}) do
-    changeset = Podcast.changeset(%Podcast{}, podcast_params)
+    changeset = Podcast.registration_changeset(%Podcast{}, podcast_params)
 
     case Repo.insert(changeset) do
-      {:ok, _podcast} ->
+      {:ok, podcast} ->
         conn
+        |> AppscoastFm.Auth.login(podcast)
         |> put_flash(:info, "Podcast created successfully.")
         |> redirect(to: podcast_path(conn, :index))
       {:error, changeset} ->
@@ -63,5 +67,16 @@ defmodule AppscoastFm.PodcastController do
     conn
     |> put_flash(:info, "Podcast deleted successfully.")
     |> redirect(to: podcast_path(conn, :index))
+  end
+
+  defp authenticate(conn, _opts) do
+    if conn.assigns.current_user do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must be logged in to access that page")
+      |> redirect(to: page_path(conn, :index))
+      |> halt()
+    end
   end
 end
