@@ -1,0 +1,65 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :email, class: "control-label" %>
+    <%= text_input f, :email, class: "form-control" %>
+    <%= error_tag f, :email %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :password, class: "control-label" %>
+    <%= text_input f, :password, class: "form-control" %>
+    <%= error_tag f, :password %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :title, class: "control-label" %>
+    <%= text_input f, :title, class: "form-control" %>
+    <%= error_tag f, :title %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :description, class: "control-label" %>
+    <%= text_input f, :description, class: "form-control" %>
+    <%= error_tag f, :description %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :thumbnail, class: "control-label" %>
+    <%= text_input f, :thumbnail, class: "form-control" %>
+    <%= error_tag f, :thumbnail %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :episode_number, class: "control-label" %>
+    <%= number_input f, :episode_number, class: "form-control" %>
+    <%= error_tag f, :episode_number %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :itunes, class: "control-label" %>
+    <%= text_input f, :itunes, class: "form-control" %>
+    <%= error_tag f, :itunes %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :stitcher, class: "control-label" %>
+    <%= text_input f, :stitcher, class: "form-control" %>
+    <%= error_tag f, :stitcher %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :podbay, class: "control-label" %>
+    <%= text_input f, :podbay, class: "form-control" %>
+    <%= error_tag f, :podbay %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

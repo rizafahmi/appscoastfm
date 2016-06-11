@@ -1,0 +1,42 @@
+<h2>Listing podcasts</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Password</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Thumbnail</th>
+      <th>Episode number</th>
+      <th>Itunes</th>
+      <th>Stitcher</th>
+      <th>Podbay</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for podcast <- @podcasts do %>
+    <tr>
+      <td><%= podcast.email %></td>
+      <td><%= podcast.password %></td>
+      <td><%= podcast.title %></td>
+      <td><%= podcast.description %></td>
+      <td><%= podcast.thumbnail %></td>
+      <td><%= podcast.episode_number %></td>
+      <td><%= podcast.itunes %></td>
+      <td><%= podcast.stitcher %></td>
+      <td><%= podcast.podbay %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: podcast_path(@conn, :show, podcast), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: podcast_path(@conn, :edit, podcast), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: podcast_path(@conn, :delete, podcast), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New podcast", to: podcast_path(@conn, :new) %>

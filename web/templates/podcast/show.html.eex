@@ -1,0 +1,53 @@
+<h2>Show podcast</h2>
+
+<ul>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @podcast.email %>
+  </li>
+
+  <li>
+    <strong>Password:</strong>
+    <%= @podcast.password %>
+  </li>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @podcast.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @podcast.description %>
+  </li>
+
+  <li>
+    <strong>Thumbnail:</strong>
+    <%= @podcast.thumbnail %>
+  </li>
+
+  <li>
+    <strong>Episode number:</strong>
+    <%= @podcast.episode_number %>
+  </li>
+
+  <li>
+    <strong>Itunes:</strong>
+    <%= @podcast.itunes %>
+  </li>
+
+  <li>
+    <strong>Stitcher:</strong>
+    <%= @podcast.stitcher %>
+  </li>
+
+  <li>
+    <strong>Podbay:</strong>
+    <%= @podcast.podbay %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: podcast_path(@conn, :edit, @podcast) %>
+<%= link "Back", to: podcast_path(@conn, :index) %>
