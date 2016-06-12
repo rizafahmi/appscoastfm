@@ -18,6 +18,11 @@ defmodule AppscoastFm.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
+  end
+
+  scope "/", AppscoastFm do
+    pipe_through [:browser, :authenticate_user]
     resources "/podcasts", PodcastController
   end
 

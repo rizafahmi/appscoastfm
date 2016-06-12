@@ -36,6 +36,7 @@ defmodule AppscoastFm.Web do
 
       import AppscoastFm.Router.Helpers
       import AppscoastFm.Gettext
+      import AppscoastFm.Auth, only: [authenticate_user: 2]
     end
   end
 
@@ -58,6 +59,8 @@ defmodule AppscoastFm.Web do
   def router do
     quote do
       use Phoenix.Router
+
+      import AppscoastFm.Auth, only: [authenticate_user: 2]
     end
   end
 
