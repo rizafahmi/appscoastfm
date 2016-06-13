@@ -1,0 +1,33 @@
+<h2>Show episode</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @episode.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @episode.description %>
+  </li>
+
+  <li>
+    <strong>Podcast:</strong>
+    <%= @episode.podcast_id %>
+  </li>
+
+  <li>
+    <strong>Thumbnail:</strong>
+    <%= @episode.thumbnail %>
+  </li>
+
+  <li>
+    <strong>Audio file:</strong>
+    <%= @episode.audio_file %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: episode_path(@conn, :edit, @episode) %>
+<%= link "Back", to: episode_path(@conn, :index) %>

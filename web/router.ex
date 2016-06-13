@@ -24,6 +24,7 @@ defmodule AppscoastFm.Router do
   scope "/", AppscoastFm do
     pipe_through [:browser, :authenticate_user]
     resources "/podcasts", PodcastController
+    resources "/episodes", EpisodeController
   end
 
   # Other scopes may use custom stacks.

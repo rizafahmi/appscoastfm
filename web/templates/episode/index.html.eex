@@ -1,0 +1,34 @@
+<h2>Listing episodes</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Podcast</th>
+      <th>Thumbnail</th>
+      <th>Audio file</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for episode <- @episodes do %>
+    <tr>
+      <td><%= episode.title %></td>
+      <td><%= episode.description %></td>
+      <td><%= episode.podcast_id %></td>
+      <td><%= episode.thumbnail %></td>
+      <td><%= episode.audio_file %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: episode_path(@conn, :show, episode), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: episode_path(@conn, :edit, episode), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: episode_path(@conn, :delete, episode), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New episode", to: episode_path(@conn, :new) %>
