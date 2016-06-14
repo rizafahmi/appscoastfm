@@ -1,3 +1,4 @@
+require IEx
 defmodule AppscoastFm.EpisodeController do
   use AppscoastFm.Web, :controller
 
@@ -22,8 +23,9 @@ defmodule AppscoastFm.EpisodeController do
     changeset = 
       podcast
       |> build_assoc(:episodes)
-      |> Episode.changeset()
+      |> Episode.changeset(episode_params)
 
+    IEx.pry
     case Repo.insert(changeset) do
       {:ok, _episode} ->
         conn
