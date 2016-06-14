@@ -5,18 +5,24 @@ defmodule AppscoastFm.EpisodeController do
 
   plug :scrub_params, "episode" when action in [:create, :update]
 
-  def index(conn, _params) do
-    episodes = Repo.all(Episode)
+  def index(conn, _params, podcast) do
+    episodes = Repo.all(podcast_episodes(podcast))
     render(conn, "index.html", episodes: episodes)
   end
 
-  def new(conn, _params) do
-    changeset = Episode.changeset(%Episode{})
+  def new(conn, _params, podcast) do
+    changeset =
+      podcast
+      |> build_assoc(:episodes)
+      |> Episode.changeset()
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"episode" => episode_params}) do
-    changeset = Episode.changeset(%Episode{}, episode_params)
+  def create(conn, %{"episode" => episode_params}, podcast) do
+    changeset = 
+      podcast
+      |> build_assoc(:episodes)
+      |> Episode.changeset()
 
     case Repo.insert(changeset) do
       {:ok, _episode} ->
@@ -28,19 +34,19 @@ defmodule AppscoastFm.EpisodeController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    episode = Repo.get!(Episode, id)
+  def show(conn, %{"id" => id}, podcast) do
+    episode = Repo.get!(podcast_episodes(podcast), id)
     render(conn, "show.html", episode: episode)
   end
 
-  def edit(conn, %{"id" => id}) do
-    episode = Repo.get!(Episode, id)
+  def edit(conn, %{"id" => id}, podcast) do
+    episode = Repo.get!(podcast_episodes(podcast), id)
     changeset = Episode.changeset(episode)
     render(conn, "edit.html", episode: episode, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "episode" => episode_params}) do
-    episode = Repo.get!(Episode, id)
+  def update(conn, %{"id" => id, "episode" => episode_params}, podcast) do
+    episode = Repo.get!(podcast_episodes(podcast), id)
     changeset = Episode.changeset(episode, episode_params)
 
     case Repo.update(changeset) do
@@ -53,15 +59,22 @@ defmodule AppscoastFm.EpisodeController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    episode = Repo.get!(Episode, id)
+  def delete(conn, %{"id" => id}, podcast) do
+    episode = Repo.get!(podcast_episodes(podcast), id)
 
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
     Repo.delete!(episode)
 
     conn
     |> put_flash(:info, "Episode deleted successfully.")
     |> redirect(to: episode_path(conn, :index))
   end
+
+  defp podcast_episodes(podcast) do
+    assoc(podcast, :episodes)
+  end
+
+  def action(conn, _) do
+    apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns.current_user])
+  end
+
 end
