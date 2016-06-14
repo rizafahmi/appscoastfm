@@ -13,7 +13,7 @@ defmodule AppscoastFm.Podcast do
     field :stitcher, :string
     field :podbay, :string
 
-    has_many :episodes, AppscoastFm.Podcast
+    has_many :episodes, AppscoastFm.Episode
 
     timestamps
   end
