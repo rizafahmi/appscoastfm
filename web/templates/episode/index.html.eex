@@ -19,7 +19,10 @@
       <td><%= episode.description %></td>
       <td><%= episode.podcast_id %></td>
       <td><img src="<%= AppscoastFm.EpisodeThumbnail.url({episode.thumbnail, episode}) %>" width="250"></td>
-      <td><%= AppscoastFm.EpisodeAudio.url({episode.audio_file, episode}) %></td>
+      <td><audio controls>
+          <source src="<%= AppscoastFm.EpisodeAudio.url({episode.audio_file, episode}) %>">
+        </audio>
+      </td>
 
       <td class="text-right">
         <%= link "Show", to: episode_path(@conn, :show, episode), class: "btn btn-default btn-xs" %>
