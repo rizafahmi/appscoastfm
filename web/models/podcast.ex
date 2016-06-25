@@ -1,5 +1,6 @@
 defmodule AppscoastFm.Podcast do
   use AppscoastFm.Web, :model
+  use Arc.Ecto.Model
 
   schema "podcasts" do
     field :email, :string
@@ -7,7 +8,7 @@ defmodule AppscoastFm.Podcast do
     field :password_hash, :string
     field :title, :string
     field :description, :string
-    field :thumbnail, :string
+    field :thumbnail, AppscoastFm.PodcastThumbnail.Type
     field :episode_number, :integer
     field :itunes, :string
     field :stitcher, :string
@@ -19,7 +20,10 @@ defmodule AppscoastFm.Podcast do
   end
 
   @required_fields ~w(email title)
-  @optional_fields ~w(description thumbnail episode_number itunes stitcher podbay)
+  @optional_fields ~w(description episode_number itunes stitcher podbay)
+
+  @required_file_fields ~w()
+  @optional_file_fields ~w(thumbnail)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -30,6 +34,7 @@ defmodule AppscoastFm.Podcast do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> cast_attachments(params, @required_file_fields, @optional_file_fields)
   end
 
   def registration_changeset(model, params \\ :empty) do

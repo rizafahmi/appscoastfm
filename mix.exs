@@ -19,7 +19,7 @@ defmodule AppscoastFm.Mixfile do
   def application do
     [mod: {AppscoastFm, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin]]
+                    :phoenix_ecto, :postgrex, :ex_aws, :httpoison, :comeonin, :arc]]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,6 +37,11 @@ defmodule AppscoastFm.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:comeonin, "~> 2.0"},
+     {:arc_ecto, "~> 0.3.1"},
+     {:arc, "0.2.0"},
+     {:ex_aws, "~> 0.4.10"},
+     {:httpoison, "~> 0.7"},
+     {:poison, "~> 1.2"},
      {:cowboy, "~> 1.0"}]
   end
 

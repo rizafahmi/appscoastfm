@@ -27,3 +27,25 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+config :arc,
+  bucket: "appscoastfm",
+  virtual_host: true,
+  version_timeout: 100_000_000_000 #milliseconds
+
+config :ex_aws, #:httpoison_opts,
+  # access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
+  # secret_access_key: [{:system, "AWS_SECRET_ACCESS_KEY"}, :instance_role]
+  access_key_id: "AKIAJ363KS24V5ANFFPA",
+  secret_access_key: "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",
+  region: "ap-southeast-1",
+  # host: "kilatstorage.com",
+  host: "s3-ap-southeast-1.amazonaws.com",
+  recv_timeout: 60_000_000,
+  hackney: [recv_timeout: 60_000_000, pool: false],
+  s3: [
+    bucket: "appscoastfm",
+    schema: "https://",
+    host: "s3-ap-southeast-1.amazonaws.com",
+    region: "ap-southeast-1"
+  ]

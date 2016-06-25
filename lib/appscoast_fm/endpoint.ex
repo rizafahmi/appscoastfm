@@ -25,7 +25,9 @@ defmodule AppscoastFm.Endpoint do
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Poison
+    json_decoder: Poison,
+    length: 100_000_000_000_000,
+    read_timeout: 100_000_000_000_000
 
   plug Plug.MethodOverride
   plug Plug.Head

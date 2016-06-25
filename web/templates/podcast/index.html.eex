@@ -23,7 +23,7 @@
       <td><%= podcast.password %></td>
       <td><%= podcast.title %></td>
       <td><%= podcast.description %></td>
-      <td><%= podcast.thumbnail %></td>
+      <td><img width="250" src="<%= AppscoastFm.PodcastThumbnail.url({podcast.thumbnail, podcast}) %>"></td>
       <td><%= podcast.episode_number %></td>
       <td><%= podcast.itunes %></td>
       <td><%= podcast.stitcher %></td>

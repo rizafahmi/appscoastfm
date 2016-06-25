@@ -25,7 +25,7 @@ defmodule AppscoastFm.EpisodeController do
       |> build_assoc(:episodes)
       |> Episode.changeset(episode_params)
 
-    IEx.pry
+    # IEx.pry
     case Repo.insert(changeset) do
       {:ok, _episode} ->
         conn
